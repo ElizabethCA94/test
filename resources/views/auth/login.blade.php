@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+{{-- @section('content')
+<script src="{{ asset('js/component-1.js') }}" defer></script>
+@endsection --}}
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
