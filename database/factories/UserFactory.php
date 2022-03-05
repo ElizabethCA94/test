@@ -36,4 +36,8 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    // User::factory()->create([
+    //     'email' => 'admin@admin.com'
+    // ])
 }
