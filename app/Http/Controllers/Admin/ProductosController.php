@@ -38,13 +38,13 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'precio' => 'required',
-            'imagen' => 'image|max:1024',
-        ]);
-        
+        // $request->validate([
+        //     // 'nombre' => 'required',
+        //     'descripcion' => 'required',
+        //     // 'precio' => 'required',
+        //     // 'imagen' => 'image|max:1024',
+        // ]);
+
         $producto = new Producto();
         $producto->nombre = $request->nombre;
         $producto->descripcion= $request->descripcion;
@@ -57,6 +57,8 @@ class ProductosController extends Controller
             $imagen->move($ruta, $imagenProducto);
             $producto->imagen =  $imagenProducto;
         }
+
+        $producto2 = new Request();
 
         $producto->save();
         return redirect()-> route('admin.productos.index');

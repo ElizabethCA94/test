@@ -2,8 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\Admin\ProductosController;
+use App\Models\Producto;
 use Illuminate\Console\Command;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use stdClass;
 
 class TestTask extends Command
 {
@@ -38,7 +42,15 @@ class TestTask extends Command
      */
     public function handle()
     {
-        $texto = "[" . date("Y-m-d H:i") . "]: Hola ";
-        Storage::append("archivo.txt", $texto);
+        $productoController = new ProductosController();
+
+        $producto = new Request();
+
+        $producto->nombre =  date("Y-m-d H:i");
+        $producto->descripcion =  'Producto por cronjobs ';
+        $producto->precio =  random_int(100,500);
+        $producto->estado =  random_int(0,1);
+
+        $productoController->store($producto);
     }
 }

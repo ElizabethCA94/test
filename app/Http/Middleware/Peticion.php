@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\PeticionController;
+use App\Http\Controllers\Admin\ProductosController;
 
 class Peticion
 {
@@ -19,6 +20,7 @@ class Peticion
     {
         $controller = new PeticionController();
         $controller->store();
+
         return $next($request);
     }
 }
