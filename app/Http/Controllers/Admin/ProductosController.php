@@ -38,17 +38,26 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
             'precio' => 'required',
-            'estado' => 'required',
+            'imagen' => 'image|max:1024',
         ]);
+        
         $producto = new Producto();
         $producto->nombre = $request->nombre;
         $producto->descripcion= $request->descripcion;
         $producto->precio = $request->precio;
-        $producto->estado =  $request->precio;
+        $producto->estado = $request->estado ? 1 : 0;
+        
+        if($imagen = $request->file('imagen')){
+            $ruta = 'imagen/';
+            $imagenProducto = date('YmdHis'). "." .$imagen->getClientOriginalExtension();
+            $imagen->move($ruta, $imagenProducto);
+            $producto->imagen =  $imagenProducto;
+        }
+
         $producto->save();
         return redirect()-> route('admin.productos.index');
     }
@@ -96,10 +105,20 @@ class ProductosController extends Controller
         
         $producto = Producto::find($id);
 
+        if($imagen = $request->file('imagen')){
+            $ruta = 'imagen/';
+            $imagenProducto = date('YmdHis'). "." .$imagen->getClientOriginalExtension();
+            $imagen->move($ruta, $imagenProducto);
+        }
+        else{
+            unset($producto->imagen);
+        }
+
         $producto->nombre = $request->nombre;
         $producto->descripcion= $request->descripcion;
         $producto->precio = $request->precio;
         $producto->estado = $request->estado;
+        $producto->imagen = $imagenProducto;
         $producto->save();
 
         return redirect()-> route('admin.productos.index');

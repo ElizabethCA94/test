@@ -27,6 +27,17 @@
                             @method('PUT')
                             @csrf
                             <div class="form-group">
+                                <label for="imagen">Imagen
+                                    <img class="px-1" id="imagen" src="/imagen/{{ $producto->imagen }}"
+                                        width="60%">
+                                </label>
+                            </div>
+                            <input type="file" class="form-control" name="imagen" id="imagen" placeholder="Imagen"
+                                accept="image/*" autocomplete="off" required>
+                            @error('file')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                            <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre"
                                     value={{ $producto->nombre }}>

@@ -24,6 +24,12 @@
                     <div class="card-body">
                         <form enctype="multipart/form-data">
                             <div class="form-group">
+                                <label for="imagen">Imagen
+                                    <img class="px-1" id="imagen" src="/imagen/{{ $producto->imagen }}"
+                                        width="60%">
+                                </label>
+                            </div>
+                            <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control" name="nombre" id="nombre" disabled value={{ $producto->nombre }}>
                             </div>
