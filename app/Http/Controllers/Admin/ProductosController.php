@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class ProductosController extends Controller
 {
@@ -14,7 +15,9 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        //
+        $productos = Producto::all();
+        // //retorne una vista 
+        return view('admin.productos.index', compact('productos'));
     }
 
     /**
@@ -24,7 +27,7 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.productos.almacenar');
     }
 
     /**
@@ -35,7 +38,19 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'precio' => 'required',
+            'estado' => 'required',
+        ]);
+        $producto = new Producto();
+        $producto->nombre = $request->nombre;
+        $producto->descripcion= $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->estado =  $request->precio;
+        $producto->save();
+        return redirect()-> route('admin.productos.index');
     }
 
     /**
@@ -46,7 +61,8 @@ class ProductosController extends Controller
      */
     public function show($id)
     {
-        //
+        $producto = Producto::find($id);
+        return view('admin.productos.mostrar', compact('producto'));
     }
 
     /**
@@ -57,7 +73,9 @@ class ProductosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $producto = Producto::find($id);
+        return view('admin.productos.editar')
+            ->with('producto', $producto);
     }
 
     /**
@@ -69,7 +87,22 @@ class ProductosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'precio' => 'required',
+            'estado' => 'required',
+        ]);
+        
+        $producto = Producto::find($id);
+
+        $producto->nombre = $request->nombre;
+        $producto->descripcion= $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->estado = $request->estado;
+        $producto->save();
+
+        return redirect()-> route('admin.productos.index');
     }
 
     /**
@@ -80,6 +113,8 @@ class ProductosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $producto = Producto::find($id);
+        $producto->delete();
+        return redirect()-> route('admin.productos.index');
     }
 }
