@@ -18,7 +18,7 @@ class ProductoSeeder extends Seeder
             'nombre' => 'Guitarra acustica',
             'descripcion' => 'Marca Gibson',
             'precio' => 800000,
-            'imagen' => '20220210134128.jpg',
+            'imagen' => '20220306054856.jpg',
             'estado' => 1,
         ]);
 
@@ -26,7 +26,7 @@ class ProductoSeeder extends Seeder
             'nombre' => 'Guitarra electrica',
             'descripcion' => 'Marca Gibson',
             'precio' => 900000,
-            'imagen' => '20220210141503.jpg',
+            'imagen' => '20220306055457.jpg',
             'estado' => 0,
         ]);
     }
