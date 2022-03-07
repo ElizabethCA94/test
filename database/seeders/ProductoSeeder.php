@@ -23,6 +23,14 @@ class ProductoSeeder extends Seeder
         ]);
 
         Producto::create([
+            'nombre' => 'Violin',
+            'descripcion' => 'Marca Gibson',
+            'precio' => 900000,
+            'imagen' => '20220306055459.jpg',
+            'estado' => 1,
+        ]);
+
+        Producto::create([
             'nombre' => 'Guitarra electrica',
             'descripcion' => 'Marca Gibson',
             'precio' => 900000,
